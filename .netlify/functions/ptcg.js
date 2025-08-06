@@ -1,10 +1,8 @@
-/* eslint-env node */
-// netlify/functions/ptcg.js
-// Simple proxy to PokémonTCG.io with CORS headers
+// netlify/functions/ptcg.js  (ESM, no ESLint warnings)
 const API_ROOT = 'https://api.pokemontcg.io/v2'
 
-exports.handler = async (event) => {
-  // Handle CORS preflight
+export const handler = async (event) => {
+  // CORS preflight
   if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,
@@ -20,16 +18,13 @@ exports.handler = async (event) => {
   try {
     const qs = event.queryStringParameters || {}
     const endpoint = qs.endpoint || 'cards'
-
     const url = new URL(`${API_ROOT}/${endpoint}`)
-    for (const [k, v] of Object.entries(qs)) {
-      if (k !== 'endpoint') url.searchParams.set(k, v)
-    }
+    for (const [k, v] of Object.entries(qs)) if (k !== 'endpoint') url.searchParams.set(k, v)
 
     const res = await fetch(url.toString(), {
       headers: {
-        'Accept': 'application/json',
-        'X-Api-Key': process.env.VITE_POKEMONTCG_API_KEY || '', // optional
+        Accept: 'application/json',
+        'X-Api-Key': process.env.VITE_POKEMONTCG_API_KEY || '',
       },
     })
 
@@ -38,7 +33,7 @@ exports.handler = async (event) => {
       statusCode: res.status,
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*', // <- CORS
+        'Access-Control-Allow-Origin': '*',
       },
       body,
     }
