@@ -1,5 +1,7 @@
+[build]
+  functions = "netlify/functions"
+
 [[redirects]]
-  from = "/ptcg/*"
-  to = "https://api.pokemontcg.io/v2/:splat"
+  from = "/*"
+  to = "/index.html"
   status = 200
-  force = true
