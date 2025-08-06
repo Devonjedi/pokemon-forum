@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/ptcg/*"
+  to = "https://api.pokemontcg.io/v2/:splat"
+  status = 200
+  force = true

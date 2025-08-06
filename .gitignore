@@ -1,0 +1,56 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Node / Vite
+node_modules/
+dist/
+.vite/
+.cache/
+.tmp/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Env & secrets
+.env
+.env.*
+!.env.example
+
+# Netlify
+.netlify/
+.netlify-cache/
+.functions-cache/
+
+# Editors / OS junk
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Tests (if you add later)
+coverage/
