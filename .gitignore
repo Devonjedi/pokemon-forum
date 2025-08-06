@@ -41,7 +41,6 @@ pnpm-debug.log*
 !.env.example
 
 # Netlify
-.netlify/
 .netlify-cache/
 .functions-cache/
 
