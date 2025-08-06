@@ -53,3 +53,6 @@ Thumbs.db
 
 # Tests (if you add later)
 coverage/
+
+# Local Netlify folder
+.netlify
