@@ -1,4 +1,3 @@
-// netlify/functions/ptcg.js  (ESM, no ESLint warnings)
 const API_ROOT = 'https://api.pokemontcg.io/v2'
 
 export const handler = async (event) => {
@@ -15,19 +14,23 @@ export const handler = async (event) => {
     }
   }
 
+  const API_KEY =
+    process.env.POKEMONTCG_API_KEY ??
+    process.env.VITE_POKEMONTCG_API_KEY ??
+    ''
+
   try {
     const qs = event.queryStringParameters || {}
     const endpoint = qs.endpoint || 'cards'
     const url = new URL(`${API_ROOT}/${endpoint}`)
-    for (const [k, v] of Object.entries(qs)) if (k !== 'endpoint') url.searchParams.set(k, v)
+    for (const [k,v] of Object.entries(qs)) if (k !== 'endpoint') url.searchParams.set(k, v)
 
     const res = await fetch(url.toString(), {
       headers: {
         Accept: 'application/json',
-        'X-Api-Key': process.env.VITE_POKEMONTCG_API_KEY || '',
+        ...(API_KEY ? { 'X-Api-Key': API_KEY } : {}), // only send if present
       },
     })
-
     const body = await res.text()
     return {
       statusCode: res.status,
